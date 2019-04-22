@@ -70,15 +70,15 @@ def request_command(tv_command: TVCommand):
     if tv_command is None:
         return
 
-    url = command_url(tv_command.value)
-    logger.log('url: ' + url)
+    url = command_url(tv_command)
+    logger.debug('url: ' + url)
 
     headers = {'Content-Type': 'application/json'}
     response = requests.post(url, headers=headers)
 
     if response.status_code != 200:
         # http error
-        logger.log('status_code should be 200, but is {}'.format(str(response.status_code)))
+        logger.debug('status_code should be 200, but is {}'.format(str(response.status_code)))
         return
 
     try:
