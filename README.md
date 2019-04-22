@@ -120,6 +120,9 @@ import sqlalchemy_utils
 
 # References
 
+## Python Data Analysis to Automatically Detect and Mute Television Commercials
+http://beepscore.com/website/2019/04/21/automatically-detecting-television-commercials.html
+
 ## Dejavu project
 Audio fingerprinting and recognition in Python.
 It has recognizers for recorded files and for live microphone input.
