@@ -130,6 +130,6 @@ if __name__ == '__main__':
     djv.fingerprint_directory("data/commercial_mp3", [".mp3"])
 
     # example, may be useful for debugging
-    recognize_audio_from_a_file(djv, filename_containing_audio_to_match='data/commercial_mp3/chantix.mp3')
+    # recognize_audio_from_a_file(djv, filename_containing_audio_to_match='data/commercial_mp3/chantix.mp3')
 
     recognize_audio_from_microphone_with_count(djv, seconds=5, count_max=40)
