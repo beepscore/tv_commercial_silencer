@@ -74,7 +74,14 @@ def request_command(tv_command: TVCommand):
     logger.debug('url: ' + url)
 
     headers = {'Content-Type': 'application/json'}
-    response = requests.post(url, headers=headers)
+    # https://stackoverflow.com/questions/16511337/correct-way-to-try-except-using-python-requests-module
+    try:
+        response = requests.post(url, headers=headers)
+        # https://2.python-requests.org//en/latest/api/#requests.Response.raise_for_status
+        response.raise_for_status()
+    except requests.exceptions.RequestException as error:
+        logger.debug(error)
+        return
 
     if response.status_code != 200:
         # http error
