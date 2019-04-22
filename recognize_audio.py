@@ -7,6 +7,8 @@ import logging_util
 from dejavu import Dejavu
 from dejavu.recognize import FileRecognizer, MicrophoneRecognizer
 
+import tv_service
+
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -46,7 +48,7 @@ def recognize_audio_from_a_file(djv, filename_containing_audio_to_match):
     match_dict = djv.recognize(FileRecognizer, filename_containing_audio_to_match)
     match_dict_json = json.dumps(match_dict)
     logger.debug('filename_containing_audio_to_match: {0}, match_dict_json: {1}\n'
-            .format(filename_containing_audio_to_match, match_dict_json))
+                 .format(filename_containing_audio_to_match, match_dict_json))
 
     # example output
     # filename_containing_audio_to_match: mp3/chantix.mp3,
@@ -83,6 +85,14 @@ def recognize_audio_from_microphone(djv, seconds=5):
             # From mic with 5 seconds we recognized: {"song_id": 13, "song_name": "chantix", "confidence": 376,
             # "offset": 525, "offset_seconds": 24.38095,
             # "file_sha1": "7050797273712b325559706c4d6878594238583866486d4b4371493d0a"}
+
+            # FIXME: don't use mute, too easy for app to get toggle confused
+            # instead in tv_service add methods like volume_duck(number_of_times, duration_seconds)
+            tv_service.mute()
+            # TODO: get duration of matching audio file
+            # after duration volume_duck will increase volume
+            # tv_service.volume_duck(number_of_times=3, duration_seconds=30)
+
             return match_dict
 
     return None
