@@ -132,3 +132,6 @@ venv/*
 # excel files
 *.xls
 *.xlsx
+
+# src directory created by pip
+src
