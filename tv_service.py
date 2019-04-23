@@ -89,12 +89,21 @@ def request_command(tv_command: TVCommand):
         return
 
     try:
-        response_json = response.json()
+        # response_dict is a python dictionary
+        response_dict = response.json()
+        # logger.debug('response_dict: {}'.format(response_dict))
+        # 2019-04-22 17:25:41 DEBUG    request_command line:94 response_dict:
+        # {'api_name': 'tv', 'response': 'transmitted command mute', 'version': '1.0'}
+
     except ValueError:
         logger.debug('Could not convert response json')
         return
 
-    response_json_string = json.dumps(response_json)
+    # convert json dictionary to string
+    response_json_string = json.dumps(response_dict)
+    logger.debug('response_json_string: {}'.format(response_json_string))
+    # 2019-04-22 17:25:41 DEBUG    request_command line:101 response_json_string:
+    # {"api_name": "tv", "response": "transmitted command mute", "version": "1.0"}
 
 
 def mute():
