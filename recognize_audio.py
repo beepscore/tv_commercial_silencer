@@ -63,10 +63,10 @@ def recognize_audio_from_microphone(djv, seconds=5):
     :param seconds: number of seconds to recognize audio
     :return: match_dict if confidence is >= confidence_minimum, else None
     """
-    logger.debug('recognize_audio_from_microphone')
     match_dict = djv.recognize(MicrophoneRecognizer, seconds=seconds)
+
     if match_dict is None:
-        logger.debug("Nothing recognized -- did you play the song out loud so your mic could hear it? :)")
+        # "Nothing recognized -- did you play the song out loud so your mic could hear it? :)"
         return None
 
     else:
@@ -76,13 +76,11 @@ def recognize_audio_from_microphone(djv, seconds=5):
         confidence = match_dict.get('confidence')
 
         if confidence is not None and confidence >= confidence_minimum:
-            match_dict_json = json.dumps(match_dict)
-            logger.debug('From mic with {0} seconds we recognized: {1}\n'.format(seconds, match_dict_json))
+            logger.debug('match_dict: {}'.format(match_dict))
             # example output
-            # 2019-04-20 21:01:40 DEBUG    recognize_audio_from_microphone line:79
-            # From mic with 5 seconds we recognized: {"song_id": 13, "song_name": "chantix", "confidence": 376,
-            # "offset": 525, "offset_seconds": 24.38095,
-            # "file_sha1": "7050797273712b325559706c4d6878594238583866486d4b4371493d0a"}
+            # 2019-04-22 17:47:34 DEBUG    recognize_audio_from_microphone line:79 match_dict:
+            # {'song_id': 4, 'song_name': 'google-help-cooper', 'confidence': 146,
+            # 'offset': 17, 'offset_seconds': 0.78948, 'file_sha1': '5b2709b5d22011c18f9a7b6ab7f04f0e89da4d41'}
 
             # FIXME: don't use mute, too easy for app to get toggle confused
             # instead in tv_service add methods like volume_duck(number_of_times, duration_seconds)
