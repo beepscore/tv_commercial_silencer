@@ -41,7 +41,11 @@ Optional step. Running test_dejavu.sh makes a temporary sqlite file
 ## database
 check sqlite schema
 
-#### create database (how to set up schema?)
+### database url format
+https://stackoverflow.com/questions/372885/how-do-i-connect-to-a-mysql-database-in-python?rq=1
+
+    mysql://<user_name>:<password>@<host_name>/<db_name>
+    mysql+mysqlconnector://beepscore:password@localhost/dejavu
 
 #### set environment variable for database
 
@@ -77,6 +81,17 @@ If no database exists it will make a new one, I think in-memory sqlite.
     From mic with 5 seconds we recognized: {"song_id": 19,
     "song_name": "tecovas-western-boots", "confidence": 179, "offset": 62,
     "offset_seconds": 2.87927, "file_sha1": "ca324b141675b59c05bdcbbdf05c038d68940376"}
+
+## mysql database
+I used conda to install mysql-connector-python
+https://stackoverflow.com/questions/34168651/what-are-the-differences-between-mysql-connector-python-mysql-connector-python
+
+Then ran
+    recognize_audio.py
+
+Got error "Can't connect to MySQL server on 'localhost' (61)"
+To use mysql, may need to start mysql server before running recognize_audio.py
+https://stackoverflow.com/questions/119008/cant-connect-to-mysql-server-on-localhost-10061
 
 ### Appendix- Install dejavu dependencies
 I installed many of these as conda packages in environment remy_python.
