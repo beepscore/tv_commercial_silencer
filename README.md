@@ -168,3 +168,13 @@ http://beepscore.com/website/2019/02/05/network-enabled-raspberry-pi-tv-remote-c
 Remote control television by sending commands from iOS device to a server.
 https://github.com/beepscore/Remy
 
+# Appendix- update Dejavu to use logging_util compatible with tv_commercial_silencer
+I used pip to install src/pydejavu and it isn't committed to this git repo.
+Manually edited src/pydejavu/dejavu/__init__.py
+
+# import logging
+import logging_util
+...
+
+# logger = logging.getLogger(__name__)
+logger = logging_util.get_logger(__name__)
