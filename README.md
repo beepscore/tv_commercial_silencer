@@ -172,9 +172,9 @@ https://github.com/beepscore/Remy
 I used pip to install src/pydejavu and it isn't committed to this git repo.
 Manually edited src/pydejavu/dejavu/__init__.py
 
-# import logging
-import logging_util
-...
+    # import logging
+    import logging_util
+    ...
 
-# logger = logging.getLogger(__name__)
-logger = logging_util.get_logger(__name__)
+    # logger = logging.getLogger(__name__)
+    logger = logging_util.get_logger(__name__)
