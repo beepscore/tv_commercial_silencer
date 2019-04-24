@@ -58,7 +58,7 @@ def recognize_audio_from_a_file(djv, filename_containing_audio_to_match):
 
 def recognize_audio_from_microphone(djv, seconds=5):
     """
-    method will return shortly after 'seconds' number of seconds
+    method samples 'seconds' number of seconds
     :param djv: a dejavu instance, preconfigured by having run fingerprint_directory
     :param seconds: number of seconds to recognize audio
     :return: match_dict if confidence is >= confidence_minimum, else None
