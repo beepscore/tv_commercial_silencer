@@ -15,11 +15,11 @@ class TVCommand(Enum):
     mute = 'mute'
     power = 'power'
     bassDecrease = 'bass-decrease'
-    bassIncrease = 'bass-increase'
-    voiceDecrease = 'voice-decrease'
-    voiceIncrease = 'voice-increase'
-    volumeDecrease = 'volume-decrease'
-    volumeIncrease = 'volume-increase'
+    bass_increase = 'bass-increase'
+    voice_decrease = 'voice-decrease'
+    voice_increase = 'voice-increase'
+    volume_decrease = 'volume-decrease'
+    volume_increase = 'volume-increase'
     volume_decrease_increase = 'volume-decrease-increase'
 
 
@@ -132,35 +132,35 @@ def bass_increase():
     """
     make a web request to a service to increase bass
     """
-    request_command(tv_command=TVCommand.bassIncrease)
+    request_command(tv_command=TVCommand.bass_increase)
 
 
 def voice_decrease():
     """
     make a web request to a service to decrease voice
     """
-    request_command(tv_command=TVCommand.voiceDecrease)
+    request_command(tv_command=TVCommand.voice_decrease)
 
 
 def voice_increase():
     """
     make a web request to a service to increase voice
     """
-    request_command(tv_command=TVCommand.voiceIncrease)
+    request_command(tv_command=TVCommand.voice_increase)
 
 
 def volume_decrease():
     """
     make a web request to a service to decrease volume
     """
-    request_command(tv_command=TVCommand.volumeDecrease)
+    request_command(tv_command=TVCommand.volume_decrease)
 
 
 def volume_increase():
     """
     make a web request to a service to increase volume
     """
-    request_command(tv_command=TVCommand.volumeIncrease)
+    request_command(tv_command=TVCommand.volume_increase)
 
 
 def volume_decrease_increase():
