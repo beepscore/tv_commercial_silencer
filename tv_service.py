@@ -20,6 +20,7 @@ class TVCommand(Enum):
     voiceIncrease = 'voice-increase'
     volumeDecrease = 'volume-decrease'
     volumeIncrease = 'volume-increase'
+    volume_decrease_increase = 'volume-decrease-increase'
 
 
 def get_base_url(filename) -> str:
@@ -160,4 +161,12 @@ def volume_increase():
     make a web request to a service to increase volume
     """
     request_command(tv_command=TVCommand.volumeIncrease)
+
+
+def volume_decrease_increase():
+    """
+    make a web request to a service to decrease volume, then increase
+    # TODO: consider add ability to pass duration_seconds
+    """
+    request_command(tv_command=TVCommand.volume_decrease_increase)
 

@@ -82,12 +82,9 @@ def recognize_audio_from_microphone(djv, seconds=5):
             # {'song_id': 4, 'song_name': 'google-help-cooper', 'confidence': 146,
             # 'offset': 17, 'offset_seconds': 0.78948, 'file_sha1': '5b2709b5d22011c18f9a7b6ab7f04f0e89da4d41'}
 
-            # FIXME: don't use mute, too easy for app to get toggle confused
-            # instead in tv_service add methods like volume_duck(number_of_times, duration_seconds)
-            tv_service.mute()
-            # TODO: get duration of matching audio file
-            # after duration volume_duck will increase volume
-            # tv_service.volume_duck(number_of_times=3, duration_seconds=30)
+            # don't call mute, too easy for app to get toggle confused
+            # TODO: consider pass duration of matching audio file
+            tv_service.volume_decrease_increase()
 
             return match_dict
 
