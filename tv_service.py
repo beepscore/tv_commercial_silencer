@@ -61,10 +61,11 @@ def command_url(tv_command: TVCommand) -> str:
     return url_string
 
 
-def request_command(tv_command: TVCommand):
+def request_command(tv_command: TVCommand, duration_seconds=None):
     """
     make a web request to a service
     :param tv_command: a TVCommand
+    :param duration_seconds: may be used to control a duration e.g. in volume_decrease_increase
     :return:
     """
 
@@ -74,10 +75,18 @@ def request_command(tv_command: TVCommand):
     url = command_url(tv_command)
     logger.debug('url: ' + url)
 
-    headers = {'Content-Type': 'application/json'}
+    # in call to requests.post, supplying json= automatically sets content type
+    # headers = {'Content-Type': 'application/json'}
+
+    data = {}
+    if duration_seconds is not None:
+        # spell key duration-seconds with '-' similar to headers convention
+        data["duration-seconds"] = duration_seconds
+
     # https://stackoverflow.com/questions/16511337/correct-way-to-try-except-using-python-requests-module
     try:
-        response = requests.post(url, headers=headers)
+        # https://stackoverflow.com/questions/20001229/how-to-get-posted-json-in-flask
+        response = requests.post(url, json=data)
         # https://2.python-requests.org//en/latest/api/#requests.Response.raise_for_status
         response.raise_for_status()
     except requests.exceptions.RequestException as error:
@@ -163,10 +172,9 @@ def volume_increase():
     request_command(tv_command=TVCommand.volume_increase)
 
 
-def volume_decrease_increase():
+def volume_decrease_increase(duration_seconds):
     """
     make a web request to a service to decrease volume, then increase
-    # TODO: consider add ability to pass duration_seconds
     """
-    request_command(tv_command=TVCommand.volume_decrease_increase)
+    request_command(tv_command=TVCommand.volume_decrease_increase, duration_seconds=duration_seconds)
 

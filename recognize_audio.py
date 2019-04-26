@@ -83,8 +83,8 @@ def recognize_audio_from_microphone(djv, seconds=5):
             # 'offset': 17, 'offset_seconds': 0.78948, 'file_sha1': '5b2709b5d22011c18f9a7b6ab7f04f0e89da4d41'}
 
             # don't call mute, too easy for app to get toggle confused
-            # TODO: consider pass duration of matching audio file
-            tv_service.volume_decrease_increase()
+            # TODO: consider set duration_seconds to duration of matching audio file
+            tv_service.volume_decrease_increase(duration_seconds=15)
 
             return match_dict
 
