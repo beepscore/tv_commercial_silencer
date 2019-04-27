@@ -64,6 +64,11 @@ def recognize_audio_from_microphone(djv, seconds=5):
     :return: match_dict if confidence is >= confidence_minimum, else None
     """
     match_dict = djv.recognize(MicrophoneRecognizer, seconds=seconds)
+    logger.debug('match_dict: {}'.format(match_dict))
+    # example output
+    # 2019-04-22 17:47:34 DEBUG    recognize_audio_from_microphone line:79 match_dict:
+    # {'song_id': 4, 'song_name': 'google-help-cooper', 'confidence': 146,
+    # 'offset': 17, 'offset_seconds': 0.78948, 'file_sha1': '5b2709b5d22011c18f9a7b6ab7f04f0e89da4d41'}
 
     if match_dict is None:
         # "Nothing recognized -- did you play the song out loud so your mic could hear it? :)"
@@ -76,12 +81,6 @@ def recognize_audio_from_microphone(djv, seconds=5):
         confidence = match_dict.get('confidence')
 
         if confidence is not None and confidence >= confidence_minimum:
-            logger.debug('match_dict: {}'.format(match_dict))
-            # example output
-            # 2019-04-22 17:47:34 DEBUG    recognize_audio_from_microphone line:79 match_dict:
-            # {'song_id': 4, 'song_name': 'google-help-cooper', 'confidence': 146,
-            # 'offset': 17, 'offset_seconds': 0.78948, 'file_sha1': '5b2709b5d22011c18f9a7b6ab7f04f0e89da4d41'}
-
             # don't call mute, too easy for app to get toggle confused
             # TODO: consider set duration_seconds to duration of matching audio file
             tv_service.volume_decrease_increase(duration_seconds=17)
