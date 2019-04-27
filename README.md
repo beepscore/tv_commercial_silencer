@@ -87,6 +87,13 @@ Got error "Can't connect to MySQL server on 'localhost' (61)"
 To use mysql, may need to start mysql server before running recognize_audio.py
 https://stackoverflow.com/questions/119008/cant-connect-to-mysql-server-on-localhost-10061
 
+## unit tests
+Note: unittest discover requires tests directory contain __init__.py
+cd to project root directory
+
+    conda activate remy_python
+    python -m unittest discover
+
 ### Appendix- Install dejavu dependencies
 I installed many of these as conda packages in environment remy_python.
 I don't know if installing dejavu from pip would handle this automatically.
