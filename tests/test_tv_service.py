@@ -8,6 +8,10 @@ from unittest.mock import patch
 
 class TestTvService(unittest.TestCase):
 
+    def test_tvcommand(self):
+        expect_dash_separated = 'volume-decrease-increase'
+        self.assertEqual(tv_service.TVCommand.volume_decrease_increase.value, expect_dash_separated)
+
     def test_command_url_volume_decrease_increase(self):
         expected = 'http://10.0.0.4:5000/api/v1/tv/volume-decrease-increase/'
         actual = tv_service.command_url(tv_service.TVCommand.volume_decrease_increase)
