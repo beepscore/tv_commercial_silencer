@@ -1,4 +1,5 @@
 import json
+import os
 import subprocess
 import logging_util
 
@@ -58,7 +59,7 @@ def duration_seconds_from_media_file(media_filename):
     write_media_info(media_filename, temp_info_filename)
     info_dict = info_dict_from_media_info(temp_info_filename)
     duration = duration_seconds_from_info_dict(info_dict)
-    # TODO: delete temp_info_filename
+    os.remove(temp_info_filename)
     return duration
 
 
