@@ -98,7 +98,11 @@ def write_media_file_durations(indirname, outfilename):
             continue
 
         duration_seconds = duration_seconds_from_media_file(indirname + '/' + filename)
-        duration_dict[filename] = duration_seconds
+
+        # in duration_dict use keys similar to dejavu match_dict song_name values,
+        # i.e. filename without extension.
+        commercial_name = pathlib.Path(filename).stem
+        duration_dict[commercial_name] = duration_seconds
 
     duration_dict_string = json.dumps(duration_dict)
 

@@ -25,9 +25,9 @@ class TestMediaUtil(unittest.TestCase):
         media_util.write_media_file_durations(indirname, media_dict_filename)
         media_duration_dict = media_util.media_durations_second_dict(media_dict_filename)
         self.assertEqual(len(media_duration_dict), 5)
-        self.assertAlmostEqual(media_duration_dict.get('Brad-Sucks--Total-Breakdown.mp3'),
+        self.assertAlmostEqual(media_duration_dict.get('Brad-Sucks--Total-Breakdown'),
                                138.997, places=2)
-        self.assertAlmostEqual(media_duration_dict.get('The-Lights-Galaxia--While-She-Sleeps.mp3'),
+        self.assertAlmostEqual(media_duration_dict.get('The-Lights-Galaxia--While-She-Sleeps'),
                                248.036, places=2)
         # clean up
         os.remove(media_dict_filename)
