@@ -58,11 +58,20 @@ def duration_seconds_from_info_dict(info_dict):
 
 
 def duration_seconds_from_media_file(media_filename):
+    """
+    :param media_filename: filename with extension e.g. './data/commercial_mp3/chantix.mp3'
+    :return: duration in seconds e.g. 15.1
+    """
+    # temp_info_filename is a file to temporarily hold output of write_media_info
     temp_info_filename = './data/temp_info.txt'
     write_media_info(media_filename, temp_info_filename)
+
     info_dict = info_dict_from_media_info(temp_info_filename)
     duration = duration_seconds_from_info_dict(info_dict)
+
+    # delete unneeded temp_info_filename
     os.remove(temp_info_filename)
+
     return duration
 
 
