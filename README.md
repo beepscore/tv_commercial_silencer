@@ -32,11 +32,12 @@ If using macOS and an audio interface, go to System Preferences / Sound / Input.
 Select the interface e.g. Scarlett 2i4 USB.
 Note I haven't tried running Dejavu on Raspberry Pi Raspbian yet, and haven't selected an audio input source.
 
-## ./test_dejavu.sh
-Optional step. Running test_dejavu.sh makes a temporary sqlite file
+## run dejavu test script
+Optional step. Running test_dejavu.sh populates results directory including test.db
+Ok to delete contents of results directory.
 
-    $ chmod u+x ./test_dejavu.sh
-    $ ./test_dejavu.sh
+    $ chmod u+x ./src/pydejavu/test_dejavu.sh
+    $ ./src/pydejavu/test_dejavu.sh
 
 ## database
 check sqlite schema
@@ -49,13 +50,6 @@ https://stackoverflow.com/questions/372885/how-do-i-connect-to-a-mysql-database-
 
 #### set environment variable for database
 
----
-To run test
-
-    ./test_dejavu.sh
-
-This populates results directory including test.db
-Ok to delete contents of results directory.
 
 ## data/config.json
 may contain a json dictionary e.g.
