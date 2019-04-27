@@ -88,8 +88,25 @@ def write_media_file_durations(indirname, outfilename):
         outfile.write(duration_dict_string)
 
 
+def media_durations_second_dict(media_durations_json_filename):
+    """
+    :param media_durations_json_filename: json file containing a dictionary
+    e.g. './data/media_durations_second.json'
+    :return: dictionary from json
+    key is media filename, value is duration in seconds e.g. 15.1
+    """
+    try:
+        with open(media_durations_json_filename) as file:
+            media_duration_seconds = json.load(file)
+    except FileNotFoundError as error:
+        logger.debug(error)
+        return None
+
+    return media_duration_seconds
+
+
 if __name__ == '__main__':
 
     print(duration_seconds_from_media_file('./data/commercial_mp3/boost.mp3'))
     print(duration_seconds_from_media_file('./data/commercial_mp3/chantix.mp3'))
-    write_media_file_durations('./data/commercial_mp3', './data/media_file_duration_seconds.json')
+    write_media_file_durations('./data/commercial_mp3', './data/media_durations_second.json')
