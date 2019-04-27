@@ -78,7 +78,8 @@ def recognize_audio_from_microphone(djv, seconds=5):
     else:
         # use confidence_minimum to help avoid false positives,
         # e.g. avoid algorithm accidentally matching to background noise with confidence ~ 10
-        confidence_minimum = 100
+        # by manual observation of logs, 100 seems overly conservative
+        confidence_minimum = 40
         confidence = match_dict.get('confidence')
 
         if confidence is not None and confidence >= confidence_minimum:
