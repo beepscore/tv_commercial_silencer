@@ -46,8 +46,10 @@ def info_dict_from_media_info(filename):
 
 def duration_seconds_from_info_dict(info_dict):
     format_dict = info_dict.get('format')
-    if format_dict is not None:
-        duration_string = format_dict.get('duration')
+    if format_dict is None:
+        return None
+
+    duration_string = format_dict.get('duration')
     if duration_string is None:
         return None
     else:
