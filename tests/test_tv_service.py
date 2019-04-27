@@ -23,4 +23,8 @@ class TestTvService(unittest.TestCase):
         tv_service.volume_decrease_increase(duration_seconds=duration_seconds)
         self.assertTrue(mock.called)
 
+    @patch('tv_service.request_command')
+    def test_volume_decrease_calls_request_command(self, mock):
+        tv_service.volume_decrease()
+        self.assertTrue(mock.called)
 
