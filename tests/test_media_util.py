@@ -2,6 +2,7 @@
 
 import unittest
 import media_util
+import os
 
 
 class TestMediaUtil(unittest.TestCase):
@@ -28,5 +29,7 @@ class TestMediaUtil(unittest.TestCase):
                                138.997, places=2)
         self.assertAlmostEqual(media_duration_dict.get('The-Lights-Galaxia--While-She-Sleeps.mp3'),
                                248.036, places=2)
+        # clean up
+        os.remove(media_dict_filename)
 
 
