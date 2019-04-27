@@ -57,6 +57,28 @@ def recognize_audio_from_a_file(djv, filename_containing_audio_to_match):
     # "match_time": 11.098071813583374}
 
 
+def time_remaining_seconds(duration_seconds, offset_seconds, sample_window_seconds):
+    """
+    :param duration_seconds: commercial audio file duration in seconds
+    :param offset_seconds: e.g. from dejavu match_dict
+        From monitoring logs, offset_seconds appears to range from approximately
+        -seconds <= offset_seconds <= (duration_seconds - seconds)
+        alternatively add seconds to each term:
+        0 <= (offset_seconds + seconds) <= duration_seconds
+    :param sample_window_seconds: dejavu sampling window
+    :return: estimated time remaining in commercial in seconds
+
+    Example:
+    duration_seconds == 60.0
+    offset_seconds == 12 seconds
+    dejavu matched live audio to commercial elapsed time == 12 seconds
+    sample_window_seconds == 5
+    return 60.0 - (12 + 5) == 43 seconds
+    """
+    duration_remaining_seconds = duration_seconds - (offset_seconds + sample_window_seconds)
+    return duration_remaining_seconds
+
+
 def recognize_audio_from_microphone(djv, seconds=5):
     """
     method samples 'seconds' number of seconds
@@ -85,11 +107,12 @@ def recognize_audio_from_microphone(djv, seconds=5):
         if confidence is not None and confidence >= confidence_minimum:
             commercial_name = match_dict.get('song_name')
             duration_seconds = media_duration_dict.get(commercial_name)
-            # TODO: consider shorten duration_seconds based upon match_dict time (offset_seconds?)
+            offset_seconds = match_dict.get('offset_seconds')
+            duration_remaining_seconds = time_remaining_seconds(duration_seconds, offset_seconds, seconds)
 
             # don't call mute, too easy for app to get toggle confused
-            # TODO: consider add a countdown timer to prevent multiple calls until duration_seconds has elapsed
-            tv_service.volume_decrease_increase(duration_seconds=duration_seconds)
+            # TODO: consider add a countdown timer to prevent multiple calls until duration_remaining_seconds has elapsed
+            tv_service.volume_decrease_increase(duration_seconds=duration_remaining_seconds)
 
             return match_dict
 
