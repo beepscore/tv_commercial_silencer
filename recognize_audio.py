@@ -85,7 +85,9 @@ def recognize_audio_from_microphone(djv, seconds=5):
         if confidence is not None and confidence >= confidence_minimum:
             commercial_name = match_dict.get('song_name')
             duration_seconds = media_duration_dict.get(commercial_name)
+
             # don't call mute, too easy for app to get toggle confused
+            # TODO: consider add a countdown timer to prevent multiple calls until duration_seconds has elapsed
             tv_service.volume_decrease_increase(duration_seconds=duration_seconds)
 
             return match_dict
