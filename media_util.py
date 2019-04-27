@@ -65,7 +65,30 @@ def duration_seconds_from_media_file(media_filename):
     return duration
 
 
+def write_media_file_durations(indirname, outfilename):
+    """
+    gets duration of every media file in indirname and writes json dictionary to outfilename
+    assumes every file in indirname is a media file such as an mp3
+    :param indirname: e.g. './data/commercial_mp3'
+    :param outfilename: e.g. './data/media_file_duration_seconds.json'
+    :return:
+    """
+    filenames = [filename for filename in os.listdir(indirname) if filename != '.DS_Store']
+
+    duration_dict = {}
+
+    for filename in filenames:
+        duration_seconds = duration_seconds_from_media_file(indirname + '/' + filename)
+        duration_dict[filename] = duration_seconds
+
+    duration_dict_string = json.dumps(duration_dict)
+
+    with open(outfilename, mode='w') as outfile:
+        outfile.write(duration_dict_string)
+
+
 if __name__ == '__main__':
 
     print(duration_seconds_from_media_file('./data/commercial_mp3/boost.mp3'))
     print(duration_seconds_from_media_file('./data/commercial_mp3/chantix.mp3'))
+    write_media_file_durations('./data/commercial_mp3', './data/media_file_duration_seconds.json')
