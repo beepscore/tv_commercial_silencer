@@ -1,5 +1,6 @@
 import json
 import os
+import pathlib
 import subprocess
 import logging_util
 
@@ -67,18 +68,26 @@ def duration_seconds_from_media_file(media_filename):
 
 def write_media_file_durations(indirname, outfilename):
     """
-    gets duration of every media file in indirname and writes json dictionary to outfilename
+    gets duration of every .mp3 file in indirname and writes json dictionary to outfilename
     key is media filename, value is duration in seconds e.g. 15.1
     assumes every file in indirname is a media file such as an mp3
     :param indirname: e.g. './data/commercial_mp3'
     :param outfilename: e.g. './data/media_durations_second.json'
     :return:
     """
-    filenames = [filename for filename in os.listdir(indirname) if filename != '.DS_Store']
+    filenames = [filename for filename in os.listdir(indirname)]
 
     duration_dict = {}
 
     for filename in filenames:
+        if filename == '.DS_Store':
+            continue
+
+        # https://stackoverflow.com/questions/541390/extracting-extension-from-filename-in-python
+        extension = pathlib.Path(filename).suffix
+        if extension != '.mp3':
+            continue
+
         duration_seconds = duration_seconds_from_media_file(indirname + '/' + filename)
         duration_dict[filename] = duration_seconds
 
