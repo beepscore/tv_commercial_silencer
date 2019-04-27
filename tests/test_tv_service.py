@@ -19,7 +19,8 @@ class TestTvService(unittest.TestCase):
         """
         https://stackoverflow.com/questions/18762293/how-to-test-that-a-function-is-called-within-a-function-with-nosetests
         """
-        tv_service.volume_decrease_increase(tv_service.TVCommand.volume_decrease_increase)
+        duration_seconds = 15.7
+        tv_service.volume_decrease_increase(duration_seconds=duration_seconds)
         self.assertTrue(mock.called)
 
 
