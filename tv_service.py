@@ -73,7 +73,7 @@ def request_command(tv_command: TVCommand, data_dict=None):
         return
 
     url = command_url(tv_command)
-    logger.debug('url: ' + url)
+    logger.debug('url: {}, data_dict: {}'.format(url, data_dict))
 
     # in call to requests.post, supplying json= automatically sets content type
     # headers = {'Content-Type': 'application/json'}
