@@ -1,6 +1,7 @@
 import json
 import os
 import logging_util
+import media_util
 
 from dejavu import Dejavu
 from dejavu.recognize import FileRecognizer, MicrophoneRecognizer
@@ -107,6 +108,12 @@ def recognize_audio_from_microphone_with_count(djv, seconds=5, count_max=4):
 
 
 if __name__ == '__main__':
+
+    media_dict_filename = './data/media_durations_second.json'
+    # update media dictionary
+    media_util.write_media_file_durations('./data/commercial_mp3', media_dict_filename)
+    media_duration_dict = media_util.media_durations_second_dict(media_dict_filename)
+    logger.debug(media_duration_dict)
 
     config_environment_variable_database_url_from_file('data/config.json')
 
