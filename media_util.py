@@ -1,3 +1,4 @@
+import json
 import subprocess
 import logging_util
 
@@ -33,6 +34,35 @@ def write_media_info(infilename, outfilename):
     subprocess.call(args)
 
 
+def info_dict_from_media_info(filename):
+
+    with open(filename) as f:
+        text = f.read()
+        info_dict = json.loads(text)
+
+    return info_dict
+
+
+def duration_seconds_from_info_dict(info_dict):
+    format_dict = info_dict.get('format')
+    if format_dict is not None:
+        duration_string = format_dict.get('duration')
+    if duration_string is None:
+        return None
+    else:
+        return float(duration_string)
+
+
+def duration_seconds_from_media_file(media_filename):
+    temp_info_filename = './data/temp_info.txt'
+    write_media_info(media_filename, temp_info_filename)
+    info_dict = info_dict_from_media_info(temp_info_filename)
+    duration = duration_seconds_from_info_dict(info_dict)
+    # TODO: delete temp_info_filename
+    return duration
+
+
 if __name__ == '__main__':
 
-    write_media_info('./data/commercial_mp3/boost.mp3', './data/info.txt')
+    print(duration_seconds_from_media_file('./data/commercial_mp3/boost.mp3'))
+    print(duration_seconds_from_media_file('./data/commercial_mp3/chantix.mp3'))
