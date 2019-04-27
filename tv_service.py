@@ -171,8 +171,11 @@ def volume_decrease_increase(duration_seconds):
     """
     make a web request to a service to decrease volume, then increase
     """
-    # spell key duration-seconds with '-' similar to headers convention
-    data_dict = {'duration-seconds': duration_seconds}
+    if duration_seconds is None:
+        data_dict = {}
+    else:
+        # spell key duration-seconds with '-' similar to headers convention
+        data_dict = {'duration-seconds': duration_seconds}
 
     request_command(tv_command=TVCommand.volume_decrease_increase, data_dict=data_dict)
 
