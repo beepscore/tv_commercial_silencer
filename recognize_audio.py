@@ -110,9 +110,14 @@ def recognize_audio_from_microphone(djv, seconds=5):
             offset_seconds = match_dict.get('offset_seconds')
             duration_remaining_seconds = time_remaining_seconds(duration_seconds, offset_seconds, seconds)
 
-            # don't call mute, too easy for app to get toggle confused
-            # TODO: consider add a countdown timer to prevent multiple calls until duration_remaining_seconds has elapsed
-            tv_service.volume_decrease_increase(duration_seconds=duration_remaining_seconds)
+            duration_remaining_seconds_min = 8
+            if duration_remaining_seconds >= duration_remaining_seconds_min:
+                # duration_remaining_seconds is long enough for tv service
+                # to emulate multiple remote control button presses.
+
+                # Don't call mute, too easy for app to get toggle confused
+                # TODO: consider add a countdown timer to prevent multiple calls until duration_remaining_seconds has elapsed
+                tv_service.volume_decrease_increase(duration_seconds=duration_remaining_seconds)
 
             return match_dict
 
